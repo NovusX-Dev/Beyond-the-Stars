@@ -5,15 +5,20 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 10f;
+    [SerializeField] int maxLives = 3;
+
+    [Header("Laser Properties")]
     [SerializeField] GameObject laserPrefab = null;
     [SerializeField] float laserYOffset = 0.8f;
     [SerializeField] float fireRate = 0.15f;
 
     private float _nextFire;
+    private int _currentLives;
 
     void Start()
     {
         transform.position = Vector3.zero;
+        _currentLives = maxLives;
     }
 
     void Update()
@@ -61,5 +66,15 @@ public class Player : MonoBehaviour
          var laserOffset = new Vector3(laserPrefab.transform.position.x, laserYOffset, 0);
          Instantiate(laserPrefab, transform.position + laserOffset, Quaternion.identity);
         
+    }
+
+    public void DamagePlayer(int amount)
+    {
+        _currentLives -= amount;
+
+        if(_currentLives <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
