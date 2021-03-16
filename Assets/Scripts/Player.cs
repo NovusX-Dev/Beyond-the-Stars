@@ -5,7 +5,11 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 10f;
-    [SerializeField] float xOffset = 0;
+    [SerializeField] GameObject laserPrefab = null;
+    [SerializeField] float laserYOffset = 0.8f;
+    [SerializeField] float fireRate = 0.15f;
+
+    private float _nextFire;
 
     void Start()
     {
@@ -16,6 +20,10 @@ public class Player : MonoBehaviour
     {
         CalculateMovement();
 
+        if(Input.GetKeyDown(KeyCode.Space) && Time.time > _nextFire)
+        {
+            FireLaser();
+        }
     }
 
     private void CalculateMovement()
@@ -43,8 +51,15 @@ public class Player : MonoBehaviour
             transform.position = new Vector3((-xBound), transform.position.y, 0);
         }
 
-        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, yBound, 1), 0);
+        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, yBound, 0), 0);
     }
 
-    
+    private void FireLaser()
+    {
+         _nextFire = Time.time + fireRate;
+
+         var laserOffset = new Vector3(laserPrefab.transform.position.x, laserYOffset, 0);
+         Instantiate(laserPrefab, transform.position + laserOffset, Quaternion.identity);
+        
+    }
 }
