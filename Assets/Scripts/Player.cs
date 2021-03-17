@@ -15,6 +15,18 @@ public class Player : MonoBehaviour
     private float _nextFire;
     private int _currentLives;
 
+    SpawnManager _spawnManager;
+
+    private void Awake()
+    {
+        _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
+
+        if(_spawnManager == null)
+        {
+            Debug.LogError("Spawn Manager doesn't Exist!!!");
+        }
+    }
+
     void Start()
     {
         transform.position = Vector3.zero;
@@ -74,6 +86,8 @@ public class Player : MonoBehaviour
 
         if(_currentLives <= 0)
         {
+            _spawnManager.OnPlayerDeath();
+
             Destroy(gameObject);
         }
     }
