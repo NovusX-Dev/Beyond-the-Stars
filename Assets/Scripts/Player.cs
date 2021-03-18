@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 10f;
+    [SerializeField] float speedBoost = 1f;
     [SerializeField] int maxLives = 3;
 
     [Header("Laser Properties")]
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour
 
     [Header("PowerUp Cooldowns")]
     [SerializeField] float tripleShotCooldown = 10f;
+    [SerializeField] float speedBoostCooldown = 5f;
 
     private float _nextFire;
     private int _currentLives;
@@ -54,7 +56,7 @@ public class Player : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
         var direction = new Vector3(horiontalInput, verticalInput, 0);
 
-        transform.Translate(direction * moveSpeed * Time.deltaTime);
+        transform.Translate(direction * (moveSpeed * speedBoost) * Time.deltaTime);
 
         BindingMovement();
     }
@@ -114,5 +116,17 @@ public class Player : MonoBehaviour
         _tripleSHotActive = true;
         yield return new WaitForSeconds(tripleShotCooldown);
         _tripleSHotActive = false;
+    }
+
+    public void OnSpeedBoostEnter(float speedBoostPowerup)
+    {
+        speedBoost = speedBoostPowerup;
+        StartCoroutine(SpeedBoostRoutine());
+    }
+
+    IEnumerator SpeedBoostRoutine()
+    {
+        yield return new WaitForSeconds(speedBoostCooldown);
+        speedBoost = 1f;
     }
 }

@@ -10,7 +10,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] float _enemySpawnTime = 5f;
 
     [Header("PowerUps")]
-    [SerializeField] GameObject _tripleShotPowerup;
+    [SerializeField] GameObject[] _powerUps;
     [SerializeField] float _minPTime = 7f, _maxPTime = 15f;
 
     bool _canSpawn = true;
@@ -41,7 +41,8 @@ public class SpawnManager : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(_minPTime, _maxPTime));
 
             var posToSpawn = new Vector3(Random.Range(-6f, 7f), 7f, 0);
-            Instantiate(_tripleShotPowerup, posToSpawn, Quaternion.identity);
+            int randomPowerup = Random.Range(0, 2);
+            Instantiate(_powerUps[randomPowerup], posToSpawn, Quaternion.identity);
         }
     }
 

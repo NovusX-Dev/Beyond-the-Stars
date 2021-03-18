@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class PowerUp : MonoBehaviour
 {
-    [SerializeField] float speed = 3f;
+    [SerializeField] float moveSpeed = 3f;
+    [SerializeField] float speedBoostPowerup = 1.5f;
 
-    void Start()
-    {
-        
-    }
+    [Range(0,2)] [Tooltip("tripleshot = 0, speed =1, shield = 2")][SerializeField] int powerUpID;
 
     void Update()
     {
-        transform.Translate(Vector3.down * speed * Time.deltaTime);
+        transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
 
         if(transform.position.y < -6.5f)
         {
@@ -28,7 +26,20 @@ public class PowerUp : MonoBehaviour
             var player = other.gameObject.GetComponent<Player>();
             if(player != null)
             {
-                player.ONTripleShotEnter();
+                switch (powerUpID)
+                {
+                    case 0: 
+                        player.ONTripleShotEnter();
+                        break;
+
+                    case 1: 
+                        player.OnSpeedBoostEnter(speedBoostPowerup);
+                        break;
+
+                    case 2:
+                        break;
+                }
+
             }
 
             Destroy(gameObject);
