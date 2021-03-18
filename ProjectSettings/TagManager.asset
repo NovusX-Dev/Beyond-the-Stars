@@ -46,6 +46,9 @@ TagManager:
   - name: Background
     uniqueID: 1541961855
     locked: 0
+  - name: Powerups
+    uniqueID: 2350382191
+    locked: 0
   - name: Characters
     uniqueID: 338079393
     locked: 0

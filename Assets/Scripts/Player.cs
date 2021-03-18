@@ -9,11 +9,16 @@ public class Player : MonoBehaviour
 
     [Header("Laser Properties")]
     [SerializeField] GameObject laserPrefab = null;
+    [SerializeField] GameObject tripleShot = null;
     [SerializeField] float laserYOffset = 0.8f;
     [SerializeField] float fireRate = 0.15f;
 
+    [Header("PowerUp Cooldowns")]
+    [SerializeField] float tripleShotCooldown = 10f;
+
     private float _nextFire;
     private int _currentLives;
+    private bool _tripleSHotActive = false;
 
     SpawnManager _spawnManager;
 
@@ -75,8 +80,15 @@ public class Player : MonoBehaviour
     {
          _nextFire = Time.time + fireRate;
 
-         var laserOffset = new Vector3(laserPrefab.transform.position.x, laserYOffset, 0);
-         Instantiate(laserPrefab, transform.position + laserOffset, Quaternion.identity);
+         if(!_tripleSHotActive)
+        {
+            var laserOffset = new Vector3(laserPrefab.transform.position.x, laserYOffset, 0);
+            Instantiate(laserPrefab, transform.position + laserOffset, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(tripleShot, transform.position, Quaternion.identity);
+        }
         
     }
 
@@ -90,5 +102,17 @@ public class Player : MonoBehaviour
 
             Destroy(gameObject);
         }
+    }
+
+    public void ONTripleShotEnter()
+    {
+        StartCoroutine(TripleShotCooldownRoutine());
+    }
+
+    IEnumerator TripleShotCooldownRoutine()
+    {
+        _tripleSHotActive = true;
+        yield return new WaitForSeconds(tripleShotCooldown);
+        _tripleSHotActive = false;
     }
 }
