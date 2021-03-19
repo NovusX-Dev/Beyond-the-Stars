@@ -18,15 +18,21 @@ public class Player : MonoBehaviour
     [SerializeField] float tripleShotCooldown = 10f;
     [SerializeField] float speedBoostCooldown = 5f;
 
+    [Header("References")]
+    [SerializeField] GameObject shields = null;
+
     private float _nextFire;
     private int _currentLives;
     private bool _tripleSHotActive = false;
+    private bool _shieldsActive = false;
 
     SpawnManager _spawnManager;
+    Animator _myAnim;
 
     private void Awake()
     {
         _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
+        _myAnim = GetComponent<Animator>();
 
         if(_spawnManager == null)
         {
@@ -96,7 +102,14 @@ public class Player : MonoBehaviour
 
     public void DamagePlayer(int amount)
     {
-        _currentLives -= amount;
+        if(_shieldsActive)
+        {
+            OnShieldPowerUp(false);
+        }
+        else
+        {
+            _currentLives -= amount;
+        }
 
         if(_currentLives <= 0)
         {
@@ -129,4 +142,12 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(speedBoostCooldown);
         speedBoost = 1f;
     }
+
+    public void OnShieldPowerUp(bool active)
+    {
+        _shieldsActive = active;
+        shields.SetActive(active);
+        _myAnim.SetBool("shieldsActive", active);
+    }
+
 }

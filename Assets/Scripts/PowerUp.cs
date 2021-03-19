@@ -37,6 +37,7 @@ public class PowerUp : MonoBehaviour
                         break;
 
                     case 2:
+                        player.OnShieldPowerUp(true);
                         break;
                 }
 
