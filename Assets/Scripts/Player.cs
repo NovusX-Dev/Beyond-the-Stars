@@ -147,7 +147,6 @@ public class Player : MonoBehaviour
     {
         _shieldsActive = active;
         shields.SetActive(active);
-        _myAnim.SetBool("shieldsActive", active);
     }
 
 }
