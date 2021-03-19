@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float speedBoost = 1f;
     [SerializeField] int maxLives = 3;
+    [SerializeField] int score;
 
     [Header("Laser Properties")]
     [SerializeField] GameObject laserPrefab = null;
@@ -28,15 +29,22 @@ public class Player : MonoBehaviour
 
     SpawnManager _spawnManager;
     Animator _myAnim;
+    UIManager _UI;
 
     private void Awake()
     {
         _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
+        _UI = GameObject.Find("HUD UI").GetComponent<UIManager>();
+
         _myAnim = GetComponent<Animator>();
 
         if(_spawnManager == null)
         {
             Debug.LogError("Spawn Manager doesn't Exist!!!");
+        }
+        if (_UI == null)
+        {
+            Debug.LogError("UI Doesn't Exist!!!");
         }
     }
 
@@ -44,6 +52,7 @@ public class Player : MonoBehaviour
     {
         transform.position = Vector3.zero;
         _currentLives = maxLives;
+        score = 0;
     }
 
     void Update()
@@ -147,6 +156,12 @@ public class Player : MonoBehaviour
     {
         _shieldsActive = active;
         shields.SetActive(active);
+    }
+
+    public void AddScore(int amount)
+    {
+        score += amount;
+        _UI.UpdateScoreUI(score);
     }
 
 }
