@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
     }
+
     void Update()
     {
         transform.Translate(Vector3.down * speed * Time.deltaTime);
@@ -25,7 +26,6 @@ public class Enemy : MonoBehaviour
             float randomX = Random.Range(-8f, 8.1f);
             transform.position = new Vector3(randomX, yNewPos, 0);
         }
-
     }
 
 

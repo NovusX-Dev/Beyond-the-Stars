@@ -120,6 +120,8 @@ public class Player : MonoBehaviour
             _currentLives -= amount;
         }
 
+        _UI.UpdateLives(_currentLives);
+
         if(_currentLives <= 0)
         {
             _spawnManager.OnPlayerDeath();
@@ -164,4 +166,5 @@ public class Player : MonoBehaviour
         _UI.UpdateScoreUI(score);
     }
 
+    
 }
