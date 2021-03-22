@@ -10,21 +10,28 @@ public class Enemy : MonoBehaviour
     [SerializeField] int attackPower = 1;
     [SerializeField] int scoreAmount = 10;
 
+    private bool _isDying = false;
+
     Player _player;
+    Animator _myAnime;
 
     private void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
+        _myAnime = GetComponent<Animator>();
     }
 
     void Update()
     {
-        transform.Translate(Vector3.down * speed * Time.deltaTime);
-
-        if(transform.position.y <= yRespawnPos)
+        if(!_isDying)
         {
-            float randomX = Random.Range(-8f, 8.1f);
-            transform.position = new Vector3(randomX, yNewPos, 0);
+            transform.Translate(Vector3.down * speed * Time.deltaTime);
+
+            if (transform.position.y <= yRespawnPos)
+            {
+                float randomX = Random.Range(-8f, 8.1f);
+                transform.position = new Vector3(randomX, yNewPos, 0);
+            }
         }
     }
 
@@ -39,7 +46,7 @@ public class Enemy : MonoBehaviour
                 _player.AddScore(scoreAmount);
             }
 
-            Destroy(this.gameObject);
+            OnEnemyDeath();
         }
 
         else if(other.CompareTag("Player"))
@@ -50,8 +57,16 @@ public class Enemy : MonoBehaviour
                 _player.DamagePlayer(attackPower);
             }
 
-            Destroy(this.gameObject);
+            OnEnemyDeath();
         }
     }
 
+    private void OnEnemyDeath()
+    {
+        _isDying = true;
+        _myAnime.SetTrigger("die");
+        var collider = GetComponent<Collider2D>();
+        collider.enabled = false;
+        Destroy(gameObject, 3.1f);
+    }
 }
