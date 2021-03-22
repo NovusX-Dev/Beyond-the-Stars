@@ -23,10 +23,10 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        if(!_isDying)
-        {
-            transform.Translate(Vector3.down * speed * Time.deltaTime);
+        transform.Translate(Vector3.down * speed * Time.deltaTime);
 
+        if (!_isDying)
+        {
             if (transform.position.y <= yRespawnPos)
             {
                 float randomX = Random.Range(-8f, 8.1f);
@@ -65,8 +65,9 @@ public class Enemy : MonoBehaviour
     {
         _isDying = true;
         _myAnime.SetTrigger("die");
+        speed = 2f;
         var collider = GetComponent<Collider2D>();
         collider.enabled = false;
-        Destroy(gameObject, 3.1f);
+        Destroy(gameObject, 2.75f);
     }
 }
