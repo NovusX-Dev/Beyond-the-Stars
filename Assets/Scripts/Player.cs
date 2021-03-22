@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
 
     [Header("References")]
     [SerializeField] GameObject shields = null;
+    [SerializeField] GameObject fireDamageRight = null;
+    [SerializeField] GameObject fireDamageLeft = null;
 
     private float _nextFire;
     private int _currentLives;
@@ -53,6 +55,9 @@ public class Player : MonoBehaviour
         transform.position = Vector3.zero;
         _currentLives = maxLives;
         score = 0;
+
+        fireDamageRight.SetActive(false);
+        fireDamageLeft.SetActive(false);
     }
 
     void Update()
@@ -121,11 +126,22 @@ public class Player : MonoBehaviour
         }
 
         _UI.UpdateLives(_currentLives);
+        
+        if(_currentLives == 2)
+        {
+            fireDamageRight.SetActive(true);
+        }
+        else if(_currentLives == 1)
+        {
+            fireDamageLeft.SetActive(true);
+        }
 
         if(_currentLives <= 0)
         {
             _spawnManager.OnPlayerDeath();
 
+            fireDamageRight.SetActive(false);
+            fireDamageLeft.SetActive(false);
             Destroy(gameObject);
         }
     }

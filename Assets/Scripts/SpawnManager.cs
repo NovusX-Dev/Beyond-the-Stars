@@ -15,7 +15,7 @@ public class SpawnManager : MonoBehaviour
 
     bool _canSpawn = true;
 
-    void Start()
+    public void StartSpawning()
     {
         StartCoroutine(SpawnEnemyRoutine());
         StartCoroutine(SpawnPowerupRoutine());
@@ -24,6 +24,8 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnEnemyRoutine()
     {
+        yield return new WaitForSeconds(2f);
+
         while (_canSpawn)
         {
             var posToSpawn = new Vector3(Random.Range(-8f, 8f), 7f, 0);
@@ -36,7 +38,9 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnPowerupRoutine()
     {
-        while(_canSpawn)
+        yield return new WaitForSeconds(2f);
+
+        while (_canSpawn)
         {
             yield return new WaitForSeconds(Random.Range(_minPTime, _maxPTime));
 

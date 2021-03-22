@@ -6,7 +6,14 @@ public class Asteriod : MonoBehaviour
 {
     [SerializeField] float rotationSpeed = 1f;
     [SerializeField] GameObject explosion = null;
-    
+
+    SpawnManager _spawnManager;
+
+    private void Start()
+    {
+        _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();        
+    }
+
     void Update()
     {
         transform.Rotate(new Vector3(0, 0, 15)* rotationSpeed * Time.deltaTime);
@@ -17,6 +24,8 @@ public class Asteriod : MonoBehaviour
         if(other.CompareTag("Laser"))
         {
             Instantiate(explosion, transform.position, Quaternion.identity);
+            Destroy(other.gameObject);
+            _spawnManager.StartSpawning();
             Destroy(gameObject);
         }
         
