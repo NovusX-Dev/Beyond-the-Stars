@@ -22,6 +22,11 @@ public class UIManager : MonoBehaviour
         livesDisplay.sprite = livesSprites[3];
         gameoverText.gameObject.SetActive(false);
         restartLevelText.gameObject.SetActive(false);
+
+        if(_gameManager == null)
+        {
+            Debug.LogError("Game Manager is Null");
+        }
     }
 
 
