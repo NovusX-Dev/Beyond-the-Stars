@@ -146,6 +146,7 @@ public class Player : MonoBehaviour
 
         if(_currentLives <= 0)
         {
+            _currentLives = 0;
             _spawnManager.OnPlayerDeath();
 
             Instantiate(deathExplosion, transform.position, Quaternion.identity);

@@ -73,6 +73,8 @@ public class Laser : MonoBehaviour
             {
                 player.DamagePlayer(1);
             }
+
+            Destroy(gameObject);
         }
     }
 }
