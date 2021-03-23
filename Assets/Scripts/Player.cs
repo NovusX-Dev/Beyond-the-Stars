@@ -19,10 +19,14 @@ public class Player : MonoBehaviour
     [SerializeField] float tripleShotCooldown = 10f;
     [SerializeField] float speedBoostCooldown = 5f;
 
+    [Header("Audio")]
+    [SerializeField] AudioClip laserAudioClip;
+
     [Header("References")]
     [SerializeField] GameObject shields = null;
     [SerializeField] GameObject fireDamageRight = null;
     [SerializeField] GameObject fireDamageLeft = null;
+    [SerializeField] GameObject deathExplosion;
 
     private float _nextFire;
     private int _currentLives;
@@ -32,6 +36,7 @@ public class Player : MonoBehaviour
     SpawnManager _spawnManager;
     Animator _myAnim;
     UIManager _UI;
+    AudioSource _audioSource;
 
     private void Awake()
     {
@@ -39,6 +44,7 @@ public class Player : MonoBehaviour
         _UI = GameObject.Find("HUD UI").GetComponent<UIManager>();
 
         _myAnim = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
 
         if(_spawnManager == null)
         {
@@ -111,7 +117,9 @@ public class Player : MonoBehaviour
         {
             Instantiate(tripleShot, transform.position, Quaternion.identity);
         }
-        
+
+        _audioSource.clip = laserAudioClip;
+        _audioSource.Play();
     }
 
     public void DamagePlayer(int amount)
@@ -140,8 +148,7 @@ public class Player : MonoBehaviour
         {
             _spawnManager.OnPlayerDeath();
 
-            fireDamageRight.SetActive(false);
-            fireDamageLeft.SetActive(false);
+            Instantiate(deathExplosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

@@ -6,8 +6,10 @@ public class PowerUp : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 3f;
     [SerializeField] float speedBoostPowerup = 1.5f;
+    [SerializeField] AudioClip powerupClip;
 
     [Range(0,2)] [Tooltip("tripleshot = 0, speed =1, shield = 2")][SerializeField] int powerUpID;
+
 
     void Update()
     {
@@ -26,6 +28,8 @@ public class PowerUp : MonoBehaviour
             var player = other.gameObject.GetComponent<Player>();
             if(player != null)
             {
+                AudioSource.PlayClipAtPoint(powerupClip, transform.position);
+
                 switch (powerUpID)
                 {
                     case 0: 
@@ -40,7 +44,6 @@ public class PowerUp : MonoBehaviour
                         player.OnShieldPowerUp(true);
                         break;
                 }
-
             }
 
             Destroy(gameObject);

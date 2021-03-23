@@ -14,11 +14,13 @@ public class Enemy : MonoBehaviour
 
     Player _player;
     Animator _myAnime;
+    AudioSource _audioSource;
 
     private void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
         _myAnime = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -68,6 +70,7 @@ public class Enemy : MonoBehaviour
         speed = 2f;
         var collider = GetComponent<Collider2D>();
         collider.enabled = false;
+        _audioSource.Play();
         Destroy(gameObject, 2.75f);
     }
 }

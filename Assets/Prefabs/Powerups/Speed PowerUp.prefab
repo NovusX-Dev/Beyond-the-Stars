@@ -156,4 +156,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   speedBoostPowerup: 2
+  powerupClip: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
   powerUpID: 1
