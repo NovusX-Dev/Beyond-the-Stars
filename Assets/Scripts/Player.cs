@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject fireDamageRight = null;
     [SerializeField] GameObject fireDamageLeft = null;
     [SerializeField] GameObject deathExplosion;
+    [SerializeField] PlayerShieldsDurability shieldsDurability;
 
     private float horiontalInput;
     private float verticalInput;
@@ -40,6 +41,7 @@ public class Player : MonoBehaviour
     Animator _myAnim;
     UIManager _UI;
     AudioSource _audioSource;
+    
 
     private void Awake()
     {
@@ -142,7 +144,7 @@ public class Player : MonoBehaviour
     {
         if(_shieldsActive)
         {
-            OnShieldPowerUp(false);
+            shieldsDurability.DamageDurability();
         }
         else
         {
