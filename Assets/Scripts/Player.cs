@@ -28,6 +28,8 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject fireDamageLeft = null;
     [SerializeField] GameObject deathExplosion;
 
+    private float horiontalInput;
+    private float verticalInput;
     private float _nextFire;
     private int _currentLives;
     private bool _tripleSHotActive = false;
@@ -68,18 +70,22 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        horiontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
+
+        _myAnim.SetFloat("xSpeed", horiontalInput);
+
         CalculateMovement();
 
         if(Input.GetKeyDown(KeyCode.Space) && Time.time > _nextFire)
         {
             FireLaser();
         }
+        
     }
 
     private void CalculateMovement()
     {
-        float horiontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
         var direction = new Vector3(horiontalInput, verticalInput, 0);
 
         transform.Translate(direction * (moveSpeed * speedBoost) * Time.deltaTime);
