@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Header("Movement & Attributes")]
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float speedBoost = 1f;
     [SerializeField] int maxLives = 3;
@@ -88,7 +89,16 @@ public class Player : MonoBehaviour
     {
         var direction = new Vector3(horiontalInput, verticalInput, 0);
 
-        transform.Translate(direction * (moveSpeed * speedBoost) * Time.deltaTime);
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            float speedMultiplier = 2f;
+            transform.Translate(direction * (moveSpeed * speedBoost * speedMultiplier) * Time.deltaTime);
+        }
+        else
+        {
+            transform.Translate(direction * (moveSpeed * speedBoost) * Time.deltaTime);
+        }
+        
 
         BindingMovement();
     }
