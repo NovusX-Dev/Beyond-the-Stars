@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 6308301143548969265}
   - component: {fileID: 6282958977146260144}
   - component: {fileID: -482343238105866316}
-  - component: {fileID: -4022544478843136782}
   - component: {fileID: 2340403220209342292}
+  - component: {fileID: -4022544478843136782}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -153,23 +153,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &-4022544478843136782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2578330460827122946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 672987bede31d9944832e979f04848a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 4
-  yNewPos: 7
-  yRespawnPos: -6.8
-  attackPower: 1
-  scoreAmount: 10
 --- !u!82 &2340403220209342292
 AudioSource:
   m_ObjectHideFlags: 0
@@ -266,3 +249,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-4022544478843136782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2578330460827122946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 672987bede31d9944832e979f04848a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 4
+  yNewPos: 7
+  yRespawnPos: -6.8
+  attackPower: 1
+  scoreAmount: 10
+  enemyLasers: {fileID: 4785357339531010599, guid: 2de38a8b92d59f440ab9079b17895f30, type: 3}
+  fireNext: 3

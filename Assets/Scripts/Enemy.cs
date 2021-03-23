@@ -9,7 +9,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] float yRespawnPos = -6.8f;
     [SerializeField] int attackPower = 1;
     [SerializeField] int scoreAmount = 10;
+    [SerializeField] GameObject enemyLasers;
+    [SerializeField] float fireNext =3f;
 
+    private float _canFire = -1;
     private bool _isDying = false;
 
     Player _player;
@@ -25,6 +28,17 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        CalculateMovement();
+        if(Time.time > _canFire)
+        {
+            fireNext = Random.Range(3f, 7f);
+            _canFire = Time.time + fireNext;
+            FireLasers();
+        }
+    }
+
+    private void CalculateMovement()
+    {
         transform.Translate(Vector3.down * speed * Time.deltaTime);
 
         if (!_isDying)
@@ -37,18 +51,30 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void FireLasers()
+    {
+        var laserContainer = Instantiate(enemyLasers, transform.position, Quaternion.identity);
+        Laser[] lasers = laserContainer.GetComponentsInChildren<Laser>();
+        for (int i = 0; i < lasers.Length; i++)
+        {
+            lasers[i].AssignEnemyLaser();
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Laser"))
         {
-            Destroy(other.gameObject);
-            if (_player != null)
+            if(!other.GetComponent<Laser>().ISEnemyLaser())
             {
-                _player.AddScore(scoreAmount);
-            }
+                Destroy(other.gameObject);
+                if (_player != null)
+                {
+                    _player.AddScore(scoreAmount);
+                }
 
-            OnEnemyDeath();
+                OnEnemyDeath();
+            }
         }
 
         else if(other.CompareTag("Player"))
