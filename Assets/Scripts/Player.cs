@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float speedBoost = 1f;
     [SerializeField] int maxLives = 3;
+    [SerializeField] int maxAmmo = 15;
     [SerializeField] int score;
 
     [Header("Laser Properties")]
@@ -32,8 +33,12 @@ public class Player : MonoBehaviour
 
     private float horiontalInput;
     private float verticalInput;
+
     private float _nextFire;
     private int _currentLives;
+    private int _currentAmmo;
+    private bool _hasAmmo = true;
+
     private bool _tripleSHotActive = false;
     private bool _shieldsActive = false;
 
@@ -65,7 +70,10 @@ public class Player : MonoBehaviour
     {
         transform.position = Vector3.zero;
         _currentLives = maxLives;
+        _currentAmmo = maxAmmo;
+        _UI.UpdateAmmoUI(_currentAmmo);
         score = 0;
+        _UI.UpdateScoreUI(score);
 
         fireDamageRight.SetActive(false);
         fireDamageLeft.SetActive(false);
@@ -80,9 +88,27 @@ public class Player : MonoBehaviour
 
         CalculateMovement();
 
-        if(Input.GetKeyDown(KeyCode.Space) && Time.time > _nextFire)
+        if(_currentAmmo <= maxAmmo)
         {
-            FireLaser();
+            if (Input.GetKeyDown(KeyCode.Space) && Time.time > _nextFire && _hasAmmo)
+            {
+                FireLaser();
+                _currentAmmo--;
+                _UI.UpdateAmmoUI(_currentAmmo);
+            }
+        }
+        if(_currentAmmo < 1)
+        {
+            _UI.UpdateAmmoUI(_currentAmmo);
+            _hasAmmo = false;
+        }
+
+        //for Debugging porpuses
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            _currentAmmo = maxAmmo;
+            _hasAmmo = true;
+            _UI.UpdateAmmoUI(_currentAmmo);
         }
         
     }

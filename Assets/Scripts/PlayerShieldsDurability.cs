@@ -37,9 +37,6 @@ public class PlayerShieldsDurability : MonoBehaviour
                 _spriteR.color = destroyed;
                 break;
         }
-
-        Debug.Log("Durability" + _currentDurability);
-        Debug.Log("Color" + _spriteR.color);
     }
 
     public void DamageDurability()
