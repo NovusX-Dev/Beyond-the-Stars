@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
 
         CalculateMovement();
 
-        if(_currentAmmo <= maxAmmo)
+        if(_currentAmmo <= (maxAmmo + _currentAmmo))
         {
             if (Input.GetKeyDown(KeyCode.Space) && Time.time > _nextFire && _hasAmmo)
             {
@@ -226,6 +226,12 @@ public class Player : MonoBehaviour
     {
         _shieldsActive = active;
         shields.SetActive(active);
+    }
+
+    public void OnAmmoPowerUp(int amount)
+    {
+        _currentAmmo += amount;
+        _UI.UpdateAmmoUI(_currentAmmo);
     }
 
     public void AddScore(int amount)

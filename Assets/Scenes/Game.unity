@@ -2573,8 +2573,12 @@ MonoBehaviour:
   - {fileID: 1260549533187403759, guid: 422d78cde217aee438dd950a3df7cd2c, type: 3}
   - {fileID: 3995811492049323393, guid: 1167f8724b18f6647997a81e77d4716b, type: 3}
   - {fileID: 5233927707749990436, guid: d750916eaf1cdec4cac29df6b9f6590b, type: 3}
-  _minPTime: 7
-  _maxPTime: 13
+  _minSpawnTime: 7
+  _maxSpawnTime: 15
+  _refillPowerups:
+  - {fileID: 658334788459067423, guid: f6222b15f61da6e469420e08d57bba04, type: 3}
+  _minRefillTime: 7
+  _maxRefillTime: 10
 --- !u!4 &1974523526
 Transform:
   m_ObjectHideFlags: 0

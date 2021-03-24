@@ -6,9 +6,10 @@ public class PowerUp : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 3f;
     [SerializeField] float speedBoostPowerup = 1.5f;
+    [SerializeField] int ammoRefillAmount = 15;
     [SerializeField] AudioClip powerupClip;
 
-    [Range(0,2)] [Tooltip("tripleshot = 0, speed =1, shield = 2")][SerializeField] int powerUpID;
+    [Range(0,3)] [Tooltip("tripleshot = 0, speed =1, shield = 2, ammo = 3, health = 4")][SerializeField] int powerUpID;
 
 
     void Update()
@@ -42,6 +43,9 @@ public class PowerUp : MonoBehaviour
 
                     case 2:
                         player.OnShieldPowerUp(true);
+                        break;
+                    case 3:
+                        player.OnAmmoPowerUp(ammoRefillAmount);
                         break;
                 }
             }

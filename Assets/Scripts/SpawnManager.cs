@@ -11,7 +11,11 @@ public class SpawnManager : MonoBehaviour
 
     [Header("PowerUps")]
     [SerializeField] GameObject[] _powerUps;
-    [SerializeField] float _minPTime = 7f, _maxPTime = 15f;
+    [SerializeField] float _minSpawnTime = 7f, _maxSpawnTime = 15f;
+
+    [Header("Ammo Health")]
+    [SerializeField] GameObject[] _refillPowerups;
+    [SerializeField] float _minRefillTime = 5f, _maxRefillTime = 10f;
 
     bool _canSpawn = true;
 
@@ -19,6 +23,7 @@ public class SpawnManager : MonoBehaviour
     {
         StartCoroutine(SpawnEnemyRoutine());
         StartCoroutine(SpawnPowerupRoutine());
+        StartCoroutine(SpawnRefillRoutine());
     }
 
 
@@ -42,11 +47,25 @@ public class SpawnManager : MonoBehaviour
 
         while (_canSpawn)
         {
-            yield return new WaitForSeconds(Random.Range(_minPTime, _maxPTime));
+            yield return new WaitForSeconds(Random.Range(_minSpawnTime, _maxSpawnTime));
 
             var posToSpawn = new Vector3(Random.Range(-6f, 7f), 7f, 0);
             int randomPowerup = Random.Range(0, 3);
             Instantiate(_powerUps[randomPowerup], posToSpawn, Quaternion.identity);
+        }
+    }
+
+    IEnumerator SpawnRefillRoutine()
+    {
+        yield return new WaitForSeconds(2f);
+
+        while (_canSpawn)
+        {
+            yield return new WaitForSeconds(Random.Range(_minRefillTime, _maxRefillTime));
+
+            var posToSpawn = new Vector3(Random.Range(-6f, 7f), 7f, 0);
+            int randomPowerup = 0;
+            Instantiate(_refillPowerups[randomPowerup], posToSpawn, Quaternion.identity);
         }
     }
 
