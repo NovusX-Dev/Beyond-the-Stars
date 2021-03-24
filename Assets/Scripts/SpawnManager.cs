@@ -17,6 +17,10 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject[] _refillPowerups;
     [SerializeField] float _minRefillTime = 5f, _maxRefillTime = 10f;
 
+    [Header("Rare Weapons")]
+    [SerializeField] GameObject[] _rareWeapons;
+    [SerializeField] float _minRareTime = 10f, _maxRareTime = 15f;
+
     bool _canSpawn = true;
 
     public void StartSpawning()
@@ -24,6 +28,7 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(SpawnEnemyRoutine());
         StartCoroutine(SpawnPowerupRoutine());
         StartCoroutine(SpawnRefillRoutine());
+        StartCoroutine(RareWeaponRoutine());
     }
 
 
@@ -66,6 +71,20 @@ public class SpawnManager : MonoBehaviour
             var posToSpawn = new Vector3(Random.Range(-6f, 7f), 7f, 0);
             int randomPowerup = Random.Range(0, 2);
             Instantiate(_refillPowerups[randomPowerup], posToSpawn, Quaternion.identity);
+        }
+    }
+
+    IEnumerator RareWeaponRoutine()
+    {
+        yield return new WaitForSeconds(2f);
+
+        while (_canSpawn)
+        {
+            yield return new WaitForSeconds(Random.Range(_minRareTime, _maxRareTime));
+
+            var posToSpawn = new Vector3(Random.Range(-6f, 7f), 7f, 0);
+            int randomPowerup = 0;
+            Instantiate(_rareWeapons[randomPowerup], posToSpawn, Quaternion.identity);
         }
     }
 

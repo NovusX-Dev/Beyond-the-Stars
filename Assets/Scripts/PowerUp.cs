@@ -10,7 +10,7 @@ public class PowerUp : MonoBehaviour
     [SerializeField] int healAmount = 1;
     [SerializeField] AudioClip powerupClip;
 
-    [Range(0,4)] [Tooltip("tripleshot = 0, speed =1, shield = 2, ammo = 3, health = 4")][SerializeField] int powerUpID;
+    [Range(0,5)] [Tooltip("tripleshot = 0, speed =1, shield = 2, ammo = 3, health = 4, heatseek = 5")][SerializeField] int powerUpID;
 
 
     void Update()
@@ -50,6 +50,9 @@ public class PowerUp : MonoBehaviour
                         break;
                     case 4:
                         player.OnHealthPowerUp(healAmount);
+                        break;
+                    case 5:
+                        player.OnHeatSeekingPowerup();
                         break;
                 }
             }

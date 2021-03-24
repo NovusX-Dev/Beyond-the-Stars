@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Laser
   - Enemy
+  - Seeking Laser
   layers:
   - Default
   - TransparentFX

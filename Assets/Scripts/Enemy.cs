@@ -87,6 +87,17 @@ public class Enemy : MonoBehaviour
 
             OnEnemyDeath();
         }
+
+        else if(other.CompareTag("Seeking Laser"))
+        {
+            Destroy(other.gameObject);
+            if (_player != null)
+            {
+                _player.AddScore(scoreAmount);
+            }
+
+            OnEnemyDeath();
+        }
     }
 
     private void OnEnemyDeath()
@@ -98,5 +109,10 @@ public class Enemy : MonoBehaviour
         collider.enabled = false;
         _audioSource.Play();
         Destroy(gameObject, 2.75f);
+    }
+
+    public bool GetIsDying()
+    {
+        return _isDying;
     }
 }
