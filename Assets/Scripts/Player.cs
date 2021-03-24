@@ -168,7 +168,7 @@ public class Player : MonoBehaviour
 
     public void DamagePlayer(int amount)
     {
-        if(_shieldsActive)
+        if (_shieldsActive)
         {
             shieldsDurability.DamageDurability();
         }
@@ -178,17 +178,10 @@ public class Player : MonoBehaviour
         }
 
         _UI.UpdateLives(_currentLives);
-        
-        if(_currentLives == 2)
-        {
-            fireDamageRight.SetActive(true);
-        }
-        else if(_currentLives == 1)
-        {
-            fireDamageLeft.SetActive(true);
-        }
 
-        if(_currentLives <= 0)
+        LivesVisualization();
+
+        if (_currentLives <= 0)
         {
             _currentLives = 0;
             _spawnManager.OnPlayerDeath();
@@ -198,6 +191,25 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void LivesVisualization()
+    {
+        if (_currentLives == 2)
+        {
+            fireDamageRight.SetActive(true);
+            fireDamageLeft.SetActive(false);
+        }
+        else if (_currentLives == 1)
+        {
+            fireDamageLeft.SetActive(true);
+        }
+        else if (_currentLives == 3)
+        {
+            fireDamageLeft.SetActive(false);
+            fireDamageRight.SetActive(false);
+        }
+    }
+
+    #region On PowerUp Enter Region
     public void ONTripleShotEnter()
     {
         StartCoroutine(TripleShotCooldownRoutine());
@@ -233,6 +245,18 @@ public class Player : MonoBehaviour
         _currentAmmo += amount;
         _UI.UpdateAmmoUI(_currentAmmo);
     }
+
+    public void OnHealthPowerUp(int amount)
+    {
+        if(_currentLives < maxLives)
+        {
+            _currentLives += amount;
+        }
+        LivesVisualization();
+        _UI.UpdateLives(_currentLives);
+    }
+
+    #endregion
 
     public void AddScore(int amount)
     {
