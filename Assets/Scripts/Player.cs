@@ -49,6 +49,7 @@ public class Player : MonoBehaviour
     Animator _myAnim;
     UIManager _UI;
     AudioSource _audioSource;
+    CameraShake _camera;
     
 
     private void Awake()
@@ -58,6 +59,7 @@ public class Player : MonoBehaviour
 
         _myAnim = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
+        _camera = GameObject.Find("Main Camera").GetComponent<CameraShake>();
 
         if(_spawnManager == null)
         {
@@ -188,8 +190,9 @@ public class Player : MonoBehaviour
         else
         {
             _currentLives -= amount;
+            StartCoroutine(_camera.Shake(0.5f, 0.5f));
         }
-
+        
         _UI.UpdateLives(_currentLives);
 
         LivesVisualization();
@@ -255,6 +258,7 @@ public class Player : MonoBehaviour
 
     public void OnAmmoPowerUp(int amount)
     {
+        _hasAmmo = true;
         _currentAmmo += amount;
         _UI.UpdateAmmoUI(_currentAmmo);
     }
