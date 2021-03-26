@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2340403220209342292}
   - component: {fileID: -4022544478843136782}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Pawn Ship_Enemy_base
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3154912113cbb4a498df6f571c74e18c, type: 3}
-  m_Color: {r: 0.94314057, g: 0.9528302, b: 0.4179868, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -262,9 +262,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
-  yNewPos: 7
-  yRespawnPos: -6.8
   attackPower: 1
   scoreAmount: 10
-  enemyLasers: {fileID: 4785357339531010599, guid: 2de38a8b92d59f440ab9079b17895f30, type: 3}
+  yNewPos: 7
+  yRespawnPos: -6.8
+  enemyLasers: {fileID: 4785357339531010599, guid: 84a6d967154ffa74c94a40de39852f8b, type: 3}
+  hasWeaponSystem: 0
   fireNext: 3

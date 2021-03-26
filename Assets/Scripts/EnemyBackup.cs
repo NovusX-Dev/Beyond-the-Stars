@@ -2,54 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class EnemyBackup : MonoBehaviour
 {
     [Header("Attributes")]
-    [SerializeField] protected float speed = 4f;
-    [SerializeField] protected int attackPower = 1;
-    [SerializeField] protected int scoreAmount = 10;
+    [SerializeField] float speed = 4f;
+    [SerializeField] int attackPower = 1;
+    [SerializeField] int scoreAmount = 10;
 
     [Header("Movement")]
-    [SerializeField] protected float yNewPos = 7f;
-    [SerializeField] protected float yRespawnPos = -6.8f;
-    
+    [SerializeField] float yNewPos = 7f;
+    [SerializeField] float yRespawnPos = -6.8f;
+
     [Header("Attack")]
-    [SerializeField] protected GameObject enemyLasers = null;
-    [SerializeField] protected bool hasWeaponSystem = false;
-    [SerializeField] protected float fireNext =3f;
+    [SerializeField] GameObject enemyLasers;
+    [SerializeField] float fireNext = 3f;
 
-    protected float _canFire = -1;
-    protected bool _isDying = false;
+    private float _canFire = -1;
+    private bool _isDying = false;
 
-    protected Player _player;
-    protected Animator _myAnime;
-    protected AudioSource _audioSource;
+    Player _player;
+    Animator _myAnime;
+    AudioSource _audioSource;
 
-    protected virtual void Start()
+    private void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
         _myAnime = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
     }
 
-    protected virtual void Update()
+    void Update()
     {
         CalculateMovement();
 
-        if(hasWeaponSystem)
+        if (Time.time > _canFire)
         {
-            if (Time.time > _canFire)
-            {
-                fireNext = Random.Range(3f, 7f);
-                _canFire = Time.time + fireNext;
-                FireLasers();
-            }
+            fireNext = Random.Range(3f, 7f);
+            _canFire = Time.time + fireNext;
+            FireLasers();
         }
     }
 
-    protected void CalculateMovement()
+    private void CalculateMovement()
     {
-        MoveDirection();
+        transform.Translate(Vector3.down * speed * Time.deltaTime);
 
         if (!_isDying)
         {
@@ -61,12 +57,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    protected virtual void MoveDirection()
-    {
-        transform.Translate(Vector3.down * speed * Time.deltaTime);
-    }
-
-    protected void FireLasers()
+    private void FireLasers()
     {
         var laserContainer = Instantiate(enemyLasers, transform.position, Quaternion.identity);
         Laser[] lasers = laserContainer.GetComponentsInChildren<Laser>();
@@ -76,11 +67,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    protected void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Laser"))
+        if (other.CompareTag("Laser"))
         {
-            if(!other.GetComponent<Laser>().ISEnemyLaser())
+            if (!other.GetComponent<Laser>().ISEnemyLaser())
             {
                 Destroy(other.gameObject);
                 if (_player != null)
@@ -92,10 +83,10 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        else if(other.CompareTag("Player"))
+        else if (other.CompareTag("Player"))
         {
             //damage player
-            if(_player != null)
+            if (_player != null)
             {
                 _player.DamagePlayer(attackPower);
             }
@@ -103,7 +94,7 @@ public class Enemy : MonoBehaviour
             OnEnemyDeath();
         }
 
-        else if(other.CompareTag("Seeking Laser"))
+        else if (other.CompareTag("Seeking Laser"))
         {
             Destroy(other.gameObject);
             if (_player != null)
@@ -115,7 +106,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    protected void OnEnemyDeath()
+    private void OnEnemyDeath()
     {
         _isDying = true;
         _myAnime.SetTrigger("die");
