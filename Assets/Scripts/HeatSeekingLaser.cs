@@ -31,17 +31,18 @@ public class HeatSeekingLaser : MonoBehaviour
 
     void Update()
     {
-        /*if(_currentTarget.GetIsDying())
+       if(_currentTarget != null)
         {
-            GetCurrentTarget();
-        }*/
+            _direction = (_currentTarget.transform.position - transform.position).normalized;
+            float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
+            var rotateToTarget = Quaternion.AngleAxis(angle, Vector3.forward);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotateToTarget, Time.deltaTime * rotationSpeed);
+        }
+        else
+        {
+            transform.Translate(Vector3.up * speed * Time.deltaTime);
+        }
 
-        _direction = (_currentTarget.transform.position - transform.position).normalized;
-        float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
-        var rotateToTarget = Quaternion.AngleAxis(angle, Vector3.forward);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotateToTarget, Time.deltaTime * rotationSpeed);
-
-        //_myRB.velocity = new Vector2(_direction.x * speed, _direction.y * speed);
     }
 
     private void FixedUpdate()
