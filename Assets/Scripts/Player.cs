@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        transform.position = Vector3.zero;
+        transform.position = new Vector3(0, -2.1f, 0) ;
         _currentLives = maxLives;
         _currentAmmo = maxAmmo;
         _UI.UpdateAmmoUI(_currentAmmo);
@@ -127,7 +127,7 @@ public class Player : MonoBehaviour
     private void BindingMovement()
     {
         float xBound = 11.5f;
-        float yBound = -4f;
+        float yBound = -4.5f;
 
         if (transform.position.x < -xBound)
         {
@@ -138,7 +138,8 @@ public class Player : MonoBehaviour
             transform.position = new Vector3((-xBound), transform.position.y, 0);
         }
 
-        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, yBound, 0), 0);
+        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, yBound, -2), 0);
+        
     }
 
     private void CheckAmmoandFire()
