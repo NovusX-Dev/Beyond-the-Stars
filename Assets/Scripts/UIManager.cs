@@ -21,10 +21,17 @@ public class UIManager : MonoBehaviour
     [SerializeField] Image livesDisplay;
     [SerializeField] Sprite[] livesSprites = null;
 
+    [Header("Thruster Cooldown")]
+    [SerializeField] Image thrusterCDImage;
+
     GameManager _gameManager;
     AudioSource _audioSource;
 
     private bool _playedNoAmmoClip = false;
+    //Variables for thrustercooldown
+    private bool _isCoolingDown = false;
+    private float _coolDownTime;
+    private float _coolDownTimer = 0f;
 
     void Start()
     {
@@ -38,8 +45,18 @@ public class UIManager : MonoBehaviour
         {
             Debug.LogError("Game Manager is Null");
         }
+
+        thrusterCDImage.gameObject.SetActive(false);
+        _coolDownTime = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().speedBoostCooldown;
     }
 
+    private void Update()
+    {
+        if(_isCoolingDown)
+        {
+            AppleThrusterCoolDown();
+        }
+    }
 
     public void UpdateScoreUI(int score)
     {
@@ -102,5 +119,27 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    
+    private void AppleThrusterCoolDown()
+    {
+        _coolDownTimer -= Time.deltaTime;
+
+        if (_coolDownTimer < 0)
+        {
+            _isCoolingDown = false;
+            thrusterCDImage.gameObject.SetActive(false);
+        }
+        else
+        {
+            thrusterCDImage.fillAmount = _coolDownTimer / _coolDownTime;
+        }
+    }
+
+    public void AppleThrusterUI()
+    {
+
+            _isCoolingDown = true;
+            thrusterCDImage.gameObject.SetActive(true);
+
+            _coolDownTimer = _coolDownTime;
+    }
 }

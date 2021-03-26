@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     [Header("PowerUp Cooldowns")]
     [SerializeField] float tripleShotCooldown = 10f;
     [SerializeField] float heatSeekingCooldown = 5f;
-    [SerializeField] float speedBoostCooldown = 5f;
+    [SerializeField] public float speedBoostCooldown = 5f;
 
     [Header("Audio")]
     [SerializeField] AudioClip laserAudioClip;
@@ -93,6 +93,7 @@ public class Player : MonoBehaviour
 
         CalculateMovement();
         CheckAmmoandFire();
+
 
         //for Debugging porpuses
         if (Input.GetKeyDown(KeyCode.Q))
@@ -241,6 +242,7 @@ public class Player : MonoBehaviour
     public void OnSpeedBoostEnter(float speedBoostPowerup)
     {
         speedBoost = speedBoostPowerup;
+        _UI.AppleThrusterUI();
         StartCoroutine(SpeedBoostRoutine());
     }
 

@@ -1421,7 +1421,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &921409491
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2039,6 +2039,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 80fba5ece7697c44eacc036539c1b552, type: 3}
   - {fileID: 21300000, guid: 482c8e4c0346b704aa5f1760c3c989d5, type: 3}
   - {fileID: 21300000, guid: 9fe6f40efddf0b64fb68a3382b14a4db, type: 3}
+  thrusterCDImage: {fileID: 1939531527}
 --- !u!82 &1127373932
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2899,7 +2900,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 2578330460827122946, guid: 2e4e60ec0419a394d966d72868ee6d12, type: 3}
   _enemiesContainer: {fileID: 794348765}
-  _enemySpawnTime: 2
+  _enemySpawnTime: 5
   _powerUps:
   - {fileID: 1260549533187403759, guid: 422d78cde217aee438dd950a3df7cd2c, type: 3}
   - {fileID: 3995811492049323393, guid: 1167f8724b18f6647997a81e77d4716b, type: 3}
