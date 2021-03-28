@@ -31,6 +31,7 @@ public class UIManager : MonoBehaviour
     [Header("Other")]
     [SerializeField] GameObject ammoWarning;
     [SerializeField] AudioClip outOfAmmoClip;
+    [SerializeField] GameObject weaponFailuer;
 
     [Header("Lives")]
     [SerializeField] Image livesDisplay;
@@ -192,5 +193,9 @@ public class UIManager : MonoBehaviour
         waveStartText.gameObject.SetActive(true);
         waveStartText.text = text;
     }
-    
+
+    public void OnWeaponFailure(bool active)
+    {
+        weaponFailuer.SetActive(active);
+    }
 }

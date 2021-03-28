@@ -16,12 +16,13 @@ public class WaveManager : MonoBehaviour
         public float enemySpawnTime = 5f;
         public AudioClip waveStartClip = null;
     }
+
     public static int enemiesRemaining = 0;
 
     [SerializeField] GameObject _enemiesContainer;
 
     [SerializeField] Wave[] _waves;
-    
+    [SerializeField] int TimeBetweenWaves = 5;
 
     private int _currentWave;
 
@@ -45,14 +46,12 @@ public class WaveManager : MonoBehaviour
         StartCoroutine(SpawnEnemyRoutine());
     }
 
-
     IEnumerator SpawnEnemyRoutine()
     {
         yield return new WaitForSeconds(2f);
 
         while (_canSpawn)
         {
-            //for (int i = 0; i < _waves.Length; i++)
             for (int i = _waves.Length - 1; i >= 0; i--)
             {
                 UIManager.Instance.UpdateWavesUI(i);
@@ -88,7 +87,8 @@ public class WaveManager : MonoBehaviour
                     _spawnManager.StopSpawning();
                     StopSpawningEnemies();
                 }
-                yield return new WaitForSeconds(2f);
+
+                yield return new WaitForSeconds(TimeBetweenWaves);
             }
         }
     }

@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     [SerializeField] float tripleShotCooldown = 10f;
     [SerializeField] float heatSeekingCooldown = 5f;
     [SerializeField] public float speedBoostCooldown = 5f;
+    [SerializeField] float weaponFailureCooldown = 5f;
 
     [Header("Audio")]
     [SerializeField] AudioClip laserAudioClip;
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour
     private bool _tripleSHotActive = false;
     private bool _heatSeekingActive = false;
     private bool _shieldsActive = false;
+    private bool _weaponFailureActive = false;
 
     SpawnManager _spawnManager;
     WaveManager _wavesManager;
@@ -78,6 +80,7 @@ public class Player : MonoBehaviour
 
         fireDamageRight.SetActive(false);
         fireDamageLeft.SetActive(false);
+
     }
 
     void Update()
@@ -90,7 +93,6 @@ public class Player : MonoBehaviour
         CalculateMovement();
         CheckAmmoandFire();
 
-
         //for Debugging porpuses
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -100,8 +102,6 @@ public class Player : MonoBehaviour
         }
 
     }
-
-
     private void CalculateMovement()
     {
         var direction = new Vector3(horiontalInput, verticalInput, 0);
@@ -144,9 +144,14 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space) && Time.time > _nextFire && _hasAmmo)
             {
-                FireLaser();
-                _currentAmmo--;
-                UIManager.Instance.UpdateAmmoUI(_currentAmmo);
+                if (!_weaponFailureActive)
+                {
+                    FireLaser();
+                    _currentAmmo--;
+                    UIManager.Instance.UpdateAmmoUI(_currentAmmo);
+                    UIManager.Instance.OnWeaponFailure(false);
+                }
+                
             }
         }
         if (_currentAmmo < 1)
@@ -160,22 +165,21 @@ public class Player : MonoBehaviour
     {
          _nextFire = Time.time + fireRate;
 
-         if(!_tripleSHotActive && !_heatSeekingActive)
-        {
-            var laserOffset = new Vector3(laserPrefab.transform.position.x, laserYOffset, 0);
-            Instantiate(laserPrefab, transform.position + laserOffset, Quaternion.identity);
-        }
-        else if(_tripleSHotActive)
-        {
-            Instantiate(tripleShot, transform.position, Quaternion.identity);
-        }
-         else if(_heatSeekingActive)
-        {
-            var laserOffset = new Vector3(heatSeekingLaser.transform.position.x, laserYOffset, 0);
-            Instantiate(heatSeekingLaser, transform.position + laserOffset, Quaternion.identity);
-        }
-
-        _audioSource.clip = laserAudioClip;
+             if (!_tripleSHotActive && !_heatSeekingActive)
+             {
+                 var laserOffset = new Vector3(laserPrefab.transform.position.x, laserYOffset, 0);
+                 Instantiate(laserPrefab, transform.position + laserOffset, Quaternion.identity);
+             }
+             else if (_tripleSHotActive)
+             {
+                 Instantiate(tripleShot, transform.position, Quaternion.identity);
+             }
+             else if (_heatSeekingActive) 
+             {
+                 var laserOffset = new Vector3(heatSeekingLaser.transform.position.x, laserYOffset, 0);
+                 Instantiate(heatSeekingLaser, transform.position + laserOffset, Quaternion.identity);
+             }
+         _audioSource.clip = laserAudioClip;
         _audioSource.Play();
     }
 
@@ -283,6 +287,19 @@ public class Player : MonoBehaviour
         _heatSeekingActive = true;
         yield return new WaitForSeconds(heatSeekingCooldown);
         _heatSeekingActive = false;
+    }
+
+    public void OnWeaponFailurePickUp()
+    {
+        StartCoroutine(WeaponFailureRoutine());
+        UIManager.Instance.OnWeaponFailure(true);
+    }
+
+    IEnumerator WeaponFailureRoutine()
+    {
+        _weaponFailureActive = true;
+        yield return new WaitForSeconds(weaponFailureCooldown);
+        _weaponFailureActive = false;
     }
 
     #endregion
