@@ -46,8 +46,8 @@ public class Player : MonoBehaviour
     private bool _shieldsActive = false;
 
     SpawnManager _spawnManager;
+    WaveManager _wavesManager;
     Animator _myAnim;
-    UIManager _UI;
     AudioSource _audioSource;
     CameraShake _camera;
     
@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
-        _UI = GameObject.Find("HUD UI").GetComponent<UIManager>();
+        _wavesManager = GameObject.Find("Wave Manager").GetComponent<WaveManager>();
 
         _myAnim = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
@@ -65,10 +65,6 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("Spawn Manager doesn't Exist!!!");
         }
-        if (_UI == null)
-        {
-            Debug.LogError("UI Doesn't Exist!!!");
-        }
     }
 
     void Start()
@@ -76,9 +72,9 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(0, -2.1f, 0) ;
         _currentLives = maxLives;
         _currentAmmo = maxAmmo;
-        _UI.UpdateAmmoUI(_currentAmmo);
+        UIManager.Instance.UpdateAmmoUI(_currentAmmo);
         score = 0;
-        _UI.UpdateScoreUI(score);
+        UIManager.Instance.UpdateScoreUI(score);
 
         fireDamageRight.SetActive(false);
         fireDamageLeft.SetActive(false);
@@ -100,7 +96,7 @@ public class Player : MonoBehaviour
         {
             _currentAmmo = maxAmmo;
             _hasAmmo = true;
-            _UI.UpdateAmmoUI(_currentAmmo);
+            UIManager.Instance.UpdateAmmoUI(_currentAmmo);
         }
 
     }
@@ -150,12 +146,12 @@ public class Player : MonoBehaviour
             {
                 FireLaser();
                 _currentAmmo--;
-                _UI.UpdateAmmoUI(_currentAmmo);
+                UIManager.Instance.UpdateAmmoUI(_currentAmmo);
             }
         }
         if (_currentAmmo < 1)
         {
-            _UI.UpdateAmmoUI(_currentAmmo);
+            UIManager.Instance.UpdateAmmoUI(_currentAmmo);
             _hasAmmo = false;
         }
     }
@@ -194,15 +190,16 @@ public class Player : MonoBehaviour
             _currentLives -= amount;
             StartCoroutine(_camera.Shake(0.5f, 0.5f));
         }
-        
-        _UI.UpdateLives(_currentLives);
+
+        UIManager.Instance.UpdateLives(_currentLives);
 
         LivesVisualization();
 
         if (_currentLives <= 0)
         {
             _currentLives = 0;
-            _spawnManager.OnPlayerDeath();
+            _spawnManager.StopSpawning();
+            _wavesManager.StopSpawningEnemies();
 
             Instantiate(deathExplosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
@@ -243,7 +240,7 @@ public class Player : MonoBehaviour
     public void OnSpeedBoostEnter(float speedBoostPowerup)
     {
         speedBoost = speedBoostPowerup;
-        _UI.AppleThrusterUI();
+        UIManager.Instance.AppleThrusterUI();
         StartCoroutine(SpeedBoostRoutine());
     }
 
@@ -263,7 +260,7 @@ public class Player : MonoBehaviour
     {
         _hasAmmo = true;
         _currentAmmo += amount;
-        _UI.UpdateAmmoUI(_currentAmmo);
+        UIManager.Instance.UpdateAmmoUI(_currentAmmo);
     }
 
     public void OnHealthPowerUp(int amount)
@@ -273,7 +270,7 @@ public class Player : MonoBehaviour
             _currentLives += amount;
         }
         LivesVisualization();
-        _UI.UpdateLives(_currentLives);
+        UIManager.Instance.UpdateLives(_currentLives);
     }
 
     public void OnHeatSeekingPowerup()
@@ -293,7 +290,7 @@ public class Player : MonoBehaviour
     public void AddScore(int amount)
     {
         score += amount;
-        _UI.UpdateScoreUI(score);
+        UIManager.Instance.UpdateScoreUI(score);
     }
 
     

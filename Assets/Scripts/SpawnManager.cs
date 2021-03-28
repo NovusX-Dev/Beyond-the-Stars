@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [Header("Enemies")]
+    /*[Header("Enemies")]
     [SerializeField] GameObject _enemyPrefab;
     [SerializeField] GameObject _enemiesContainer;
-    [SerializeField] float _enemySpawnTime = 5f;
+    [SerializeField] float _enemySpawnTime = 5f;*/
 
     [Header("PowerUps")]
     [SerializeField] GameObject[] _powerUps;
@@ -25,14 +25,14 @@ public class SpawnManager : MonoBehaviour
 
     public void StartSpawning()
     {
-        StartCoroutine(SpawnEnemyRoutine());
+       // StartCoroutine(SpawnEnemyRoutine());
         StartCoroutine(SpawnPowerupRoutine());
         StartCoroutine(SpawnRefillRoutine());
         StartCoroutine(RareWeaponRoutine());
     }
 
 
-    IEnumerator SpawnEnemyRoutine()
+    /*public IEnumerator SpawnEnemyRoutine()
     {
         yield return new WaitForSeconds(2f);
 
@@ -44,7 +44,7 @@ public class SpawnManager : MonoBehaviour
 
             yield return new WaitForSeconds(_enemySpawnTime);
         }
-    }
+    }*/
 
     IEnumerator SpawnPowerupRoutine()
     {
@@ -88,7 +88,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    public void OnPlayerDeath()
+    public void StopSpawning()
     {
         _canSpawn = false;
     }

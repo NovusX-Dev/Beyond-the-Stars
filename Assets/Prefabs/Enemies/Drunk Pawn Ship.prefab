@@ -258,7 +258,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8493962082194412580}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1789178d6cb8dfa4fb27f3332afa68aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 5401597ea787b0b41b0f911cc6aea76e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
@@ -270,3 +270,4 @@ MonoBehaviour:
   hasWeaponSystem: 0
   fireNext: 3
   xAngle: 3
+  changeAngleTimer: 3

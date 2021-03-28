@@ -7,11 +7,26 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    private static UIManager _instance;
+    public static UIManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+                Debug.LogError("The UI Manager is null");
+            return _instance;
+        }
+    }
+    #region Serialized Variables
     [Header("Texts")]
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI gameoverText;
+    [SerializeField] TextMeshProUGUI winText;
     [SerializeField] TextMeshProUGUI restartLevelText;
     [SerializeField] TextMeshProUGUI ammotText;
+    [SerializeField] TextMeshProUGUI wavesText;
+    [SerializeField] TextMeshProUGUI enemiesRemainingText;
+    [SerializeField] TextMeshProUGUI waveStartText;
 
     [Header("Other")]
     [SerializeField] GameObject ammoWarning;
@@ -24,6 +39,8 @@ public class UIManager : MonoBehaviour
     [Header("Thruster Cooldown")]
     [SerializeField] Image thrusterCDImage;
 
+    #endregion
+
     GameManager _gameManager;
     AudioSource _audioSource;
 
@@ -32,6 +49,11 @@ public class UIManager : MonoBehaviour
     private bool _isCoolingDown = false;
     private float _coolDownTime;
     private float _coolDownTimer = 0f;
+
+    private void Awake()
+    {
+        _instance = this;
+    }
 
     void Start()
     {
@@ -102,7 +124,7 @@ public class UIManager : MonoBehaviour
 
     private void GameOverSequence()
     {
-        _gameManager.GameOver();
+        _gameManager.GameEnd();
         gameoverText.gameObject.SetActive(true);
         restartLevelText.gameObject.SetActive(true);
         StartCoroutine(GameOverFlickerRoutine());
@@ -117,6 +139,13 @@ public class UIManager : MonoBehaviour
             gameoverText.text = "";
             yield return new WaitForSeconds(0.35f);
         }
+    }
+
+    public void WinSequence()
+    {
+        _gameManager.GameEnd();
+        winText.gameObject.SetActive(true);
+        restartLevelText.gameObject.SetActive(true);
     }
 
     private void AppleThrusterCoolDown()
@@ -142,4 +171,26 @@ public class UIManager : MonoBehaviour
 
             _coolDownTimer = _coolDownTime;
     }
+
+    public void UpdateWavesUI(int waves)
+    {
+        wavesText.text = waves.ToString();
+    }
+
+    public void UpdateEnemiesRemainingUI(int enemies)
+    {
+        enemiesRemainingText.text = enemies.ToString();
+    }
+
+    public void DisableWaveStartText()
+    {
+        waveStartText.gameObject.SetActive(false);
+    }
+
+    public void EnableWaveStartText(string text)
+    {
+        waveStartText.gameObject.SetActive(true);
+        waveStartText.text = text;
+    }
+    
 }

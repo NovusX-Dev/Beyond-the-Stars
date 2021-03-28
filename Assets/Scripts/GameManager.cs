@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void GameOver()
+    public void GameEnd()
     {
         _isGameOver = true;
     }

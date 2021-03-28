@@ -24,12 +24,14 @@ public class Enemy : MonoBehaviour
     protected Player _player;
     protected Animator _myAnime;
     protected AudioSource _audioSource;
+    protected WaveManager _wavesManager;
 
     protected virtual void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
         _myAnime = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
+        _wavesManager = GameObject.Find("Wave Manager").GetComponent<WaveManager>();
     }
 
     protected virtual void Update()
@@ -123,6 +125,8 @@ public class Enemy : MonoBehaviour
         var collider = GetComponent<Collider2D>();
         collider.enabled = false;
         _audioSource.Play();
+        WaveManager.enemiesRemaining--;
+        UIManager.Instance.UpdateEnemiesRemainingUI(WaveManager.enemiesRemaining);
         Destroy(gameObject, 2.75f);
     }
 
@@ -130,4 +134,5 @@ public class Enemy : MonoBehaviour
     {
         return _isDying;
     }
+    
 }

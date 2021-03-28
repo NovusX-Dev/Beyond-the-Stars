@@ -8,10 +8,12 @@ public class Asteriod : MonoBehaviour
     [SerializeField] GameObject explosion = null;
 
     SpawnManager _spawnManager;
+    WaveManager _wavesManager;
 
     private void Start()
     {
-        _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();        
+        _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
+        _wavesManager = GameObject.Find("Wave Manager").GetComponent<WaveManager>();
     }
 
     void Update()
@@ -26,6 +28,7 @@ public class Asteriod : MonoBehaviour
             Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(other.gameObject);
             _spawnManager.StartSpawning();
+            _wavesManager.StartWaves();
             Destroy(gameObject);
         }
         
