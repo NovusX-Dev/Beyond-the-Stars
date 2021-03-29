@@ -93,6 +93,11 @@ public class Player : MonoBehaviour
         CalculateMovement();
         CheckAmmoandFire();
 
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            PowerUp.PullPowerUp();
+        }
+
         //for Debugging porpuses
         if (Input.GetKeyDown(KeyCode.Q))
         {

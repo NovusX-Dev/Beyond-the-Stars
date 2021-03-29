@@ -13,15 +13,37 @@ public class PowerUp : MonoBehaviour
     [Range(0,6)] [Tooltip("tripleshot = 0, speed =1, shield = 2, ammo = 3, health = 4, heatseek = 5, weaponFailure = 6")]
     [SerializeField] int powerUpID;
 
+    private static bool _canPull = false;
+    private Vector3 _direction = Vector3.zero;
+
+    private Player _player;
+
+    private void Awake()
+    {
+        _player = FindObjectOfType<Player>();
+    }
 
     void Update()
     {
-        transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
+        if (!_canPull)
+        {
+            transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
+        }
+        else if(_canPull)
+        {
+            _direction = _player.transform.position - transform.position;
+            transform.Translate(_direction * moveSpeed * 2 * Time.deltaTime);
+        }
 
         if(transform.position.y < -6.5f)
         {
             Destroy(gameObject);
         }
+    }
+
+    public static void PullPowerUp()
+    {
+        _canPull = true;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
