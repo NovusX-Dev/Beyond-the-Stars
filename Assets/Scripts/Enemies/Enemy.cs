@@ -18,8 +18,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected bool hasWeaponSystem = false;
     [SerializeField] protected float fireNext =3f;
 
+    [Header("Defence")]
+    [SerializeField] protected GameObject _shields;
+    [Range(0f,0.5f)] [SerializeField] protected float _shieldProbability = .25f;
+    
     protected float _canFire = -1;
     protected bool _isDying = false;
+    protected bool _hasShields = false;
+    protected float _currentProbability;
 
     protected Player _player;
     protected Animator _myAnime;
@@ -32,6 +38,9 @@ public class Enemy : MonoBehaviour
         _myAnime = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
         _wavesManager = GameObject.Find("Wave Manager").GetComponent<WaveManager>();
+
+        _currentProbability = Random.Range(0f, 0.5f);
+        ShieldProbability();
     }
 
     protected virtual void Update()
@@ -78,11 +87,49 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    protected void ShieldProbability()
+    {
+        if (_currentProbability <= _shieldProbability)
+        {
+            _hasShields = true;
+            _shields.gameObject.SetActive(true);
+        }
+        else
+        {
+            _hasShields = false;
+            _shields.gameObject.SetActive(false);
+        }
+    }
+
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Laser"))
-        {
-            if(!other.GetComponent<Laser>().ISEnemyLaser())
+   
+            if (other.CompareTag("Laser"))
+            {
+                if (!other.GetComponent<Laser>().ISEnemyLaser())
+                {
+                    Destroy(other.gameObject);
+                    if (_player != null)
+                    {
+                        _player.AddScore(scoreAmount);
+                    }
+
+                    OnEnemyDeath();
+                }
+            }
+
+            else if (other.CompareTag("Player"))
+            {
+                //damage player
+                if (_player != null)
+                {
+                    _player.DamagePlayer(attackPower);
+                }
+
+                OnEnemyDeath();
+            }
+
+            else if (other.CompareTag("Seeking Laser"))
             {
                 Destroy(other.gameObject);
                 if (_player != null)
@@ -92,42 +139,27 @@ public class Enemy : MonoBehaviour
 
                 OnEnemyDeath();
             }
-        }
-
-        else if(other.CompareTag("Player"))
-        {
-            //damage player
-            if(_player != null)
-            {
-                _player.DamagePlayer(attackPower);
-            }
-
-            OnEnemyDeath();
-        }
-
-        else if(other.CompareTag("Seeking Laser"))
-        {
-            Destroy(other.gameObject);
-            if (_player != null)
-            {
-                _player.AddScore(scoreAmount);
-            }
-
-            OnEnemyDeath();
-        }
     }
 
     protected void OnEnemyDeath()
     {
-        _isDying = true;
-        _myAnime.SetTrigger("die");
-        speed = 2f;
-        var collider = GetComponent<Collider2D>();
-        collider.enabled = false;
-        _audioSource.Play();
-        WaveManager.enemiesRemaining--;
-        UIManager.Instance.UpdateEnemiesRemainingUI(WaveManager.enemiesRemaining);
-        Destroy(gameObject, 2.75f);
+        if (_hasShields)
+        {
+            _shields.gameObject.SetActive(false);
+            _hasShields = false;
+        }
+        else
+        {
+            _isDying = true;
+            _myAnime.SetTrigger("die");
+            speed = 2f;
+            var collider = GetComponent<Collider2D>();
+            collider.enabled = false;
+            _audioSource.Play();
+            WaveManager.enemiesRemaining--;
+            UIManager.Instance.UpdateEnemiesRemainingUI(WaveManager.enemiesRemaining);
+            Destroy(gameObject, 2.75f);
+        }
     }
 
     public bool GetIsDying()
