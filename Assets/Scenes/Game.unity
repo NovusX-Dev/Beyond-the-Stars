@@ -2564,6 +2564,63 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1176539492
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1176539494}
+  - component: {fileID: 1176539493}
+  m_Layer: 0
+  m_Name: Kamikaze Location
+  m_TagString: Kamikaze Location
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &1176539493
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176539492}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.42512226, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 24.840857, y: 1}
+  m_EdgeRadius: 0
+--- !u!4 &1176539494
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176539492}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.22, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1214829728
 GameObject:
   m_ObjectHideFlags: 0
@@ -3025,10 +3082,10 @@ MonoBehaviour:
   _enemiesContainer: {fileID: 1815658152}
   _waves:
   - waveName: Wave 02
-    enemyCountPerWave: 4
+    enemyCountPerWave: 6
     enemyTypesToSpawn:
     - {fileID: 8493962082194412581, guid: d9cf4c32afaf99747b81a37b863c1369, type: 3}
-    - {fileID: -4022544478843136782, guid: 51afe0091b887e84885e440d43c5243b, type: 3}
+    - {fileID: 5577179292087162335, guid: 7e101d9118b04bc46ab267e17394a8bb, type: 3}
     spawnBoss: 0
     enemySpawnTime: 4
     waveStartClip: {fileID: 8300000, guid: 50408a93bd6aa8742a63319d831dae60, type: 3}
@@ -3048,7 +3105,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1459233554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1815658153}
@@ -3774,7 +3831,9 @@ MonoBehaviour:
   - {fileID: 1440973367696910044, guid: 6e7df52fcc1fc944eb0a6d823daf9404, type: 3}
   _minRefillTime: 10
   _maxRefillTime: 12
-  _rarePowerUps: []
+  _rarePowerUps:
+  - {fileID: 955212580583972155, guid: 4b33e22bf9f94d244b6bf1bc51c3c0ed, type: 3}
+  - {fileID: 4922476759408169051, guid: 02d743be0c191f84f8e4d83e07d6d842, type: 3}
   _minRareTime: 12
   _maxRareTime: 17
 --- !u!4 &1974523526
@@ -4583,7 +4642,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8231622403732820906, guid: ea8c1f5242d386648a0d5c654ce09b18, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.18
+      value: 3.24
       objectReference: {fileID: 0}
     - target: {fileID: 8231622403732820906, guid: ea8c1f5242d386648a0d5c654ce09b18, type: 3}
       propertyPath: m_LocalPosition.z
