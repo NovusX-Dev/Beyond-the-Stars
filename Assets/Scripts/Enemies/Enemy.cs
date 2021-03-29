@@ -42,6 +42,7 @@ public class Enemy : MonoBehaviour
         _wavesManager = GameObject.Find("Wave Manager").GetComponent<WaveManager>();
 
         _currentShieldProbability = Random.Range(0f, 0.5f);
+        _currentWeaponProbability = Random.Range(0f, 0.5f);
         ShieldProbability();
         WeaponProbability();
     }
