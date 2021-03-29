@@ -267,8 +267,9 @@ MonoBehaviour:
   scoreAmount: 10
   yNewPos: 7
   yRespawnPos: -6.8
-  enemyLasers: {fileID: 0}
+  enemyLasers: {fileID: 5169010427843196906, guid: cf926bf3140146e4c953bc29a09aeb72, type: 3}
   hasWeaponSystem: 0
+  _weaponProbability: 0.25
   fireNext: 3
   _shields: {fileID: 2519359316493559860}
   _shieldProbability: 0.25

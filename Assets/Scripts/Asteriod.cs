@@ -25,11 +25,14 @@ public class Asteriod : MonoBehaviour
     {
         if(other.CompareTag("Laser"))
         {
-            Instantiate(explosion, transform.position, Quaternion.identity);
-            Destroy(other.gameObject);
-            _spawnManager.StartSpawning();
-            _wavesManager.StartWaves();
-            Destroy(gameObject);
+            if (!other.GetComponent<Laser>().GetIsEnemyLaser())
+            {
+                Instantiate(explosion, transform.position, Quaternion.identity);
+                Destroy(other.gameObject);
+                _spawnManager.StartSpawning();
+                _wavesManager.StartWaves();
+                Destroy(gameObject);
+            }
         }
         
     }

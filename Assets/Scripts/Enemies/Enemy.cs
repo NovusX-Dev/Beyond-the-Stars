@@ -16,16 +16,18 @@ public class Enemy : MonoBehaviour
     [Header("Attack")]
     [SerializeField] protected GameObject enemyLasers = null;
     [SerializeField] protected bool hasWeaponSystem = false;
+    [Range(0f, 0.5f)] [SerializeField] protected float _weaponProbability = 0.25f;
     [SerializeField] protected float fireNext =3f;
 
-    [Header("Defence")]
+    [Header("Defense")]
     [SerializeField] protected GameObject _shields;
     [Range(0f,0.5f)] [SerializeField] protected float _shieldProbability = .25f;
     
     protected float _canFire = -1;
     protected bool _isDying = false;
     protected bool _hasShields = false;
-    protected float _currentProbability;
+    protected float _currentShieldProbability;
+    protected float _currentWeaponProbability;
 
     protected Player _player;
     protected Animator _myAnime;
@@ -39,8 +41,9 @@ public class Enemy : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         _wavesManager = GameObject.Find("Wave Manager").GetComponent<WaveManager>();
 
-        _currentProbability = Random.Range(0f, 0.5f);
+        _currentShieldProbability = Random.Range(0f, 0.5f);
         ShieldProbability();
+        WeaponProbability();
     }
 
     protected virtual void Update()
@@ -89,7 +92,7 @@ public class Enemy : MonoBehaviour
 
     protected void ShieldProbability()
     {
-        if (_currentProbability <= _shieldProbability)
+        if (_currentShieldProbability <= _shieldProbability)
         {
             _hasShields = true;
             _shields.gameObject.SetActive(true);
@@ -99,6 +102,11 @@ public class Enemy : MonoBehaviour
             _hasShields = false;
             _shields.gameObject.SetActive(false);
         }
+    }
+
+    protected void WeaponProbability()
+    {
+        hasWeaponSystem = _currentWeaponProbability <= _weaponProbability;
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D other)
