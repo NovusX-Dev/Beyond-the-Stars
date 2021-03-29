@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HeatSeekingLaser : MonoBehaviour
 {
+    //Code Programming also: Homing Projectile
+
     [SerializeField] float speed = 8f;
     [SerializeField] float rotationSpeed = 3f;
 
