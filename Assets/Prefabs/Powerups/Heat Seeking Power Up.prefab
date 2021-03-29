@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 3116830476878625045}
   - component: {fileID: 1964721946331223219}
   - component: {fileID: 9203453932102294757}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Heat Seeking Power Up
-  m_TagString: Untagged
+  m_TagString: Power Up
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

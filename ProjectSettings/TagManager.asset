@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Seeking Laser
   - Kamikaze Location
+  - Power Up
   layers:
   - Default
   - TransparentFX

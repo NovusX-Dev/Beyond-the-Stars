@@ -15,6 +15,7 @@ public class PowerUp : MonoBehaviour
 
     private static bool _canPull = false;
     private Vector3 _direction = Vector3.zero;
+    private bool _canDestroyPowerUp = false;
 
     private Player _player;
 
@@ -84,5 +85,16 @@ public class PowerUp : MonoBehaviour
 
             Destroy(gameObject);
         }
+
+        if (other.CompareTag("Laser") && _canDestroyPowerUp)
+        {
+            Destroy(other.gameObject);
+            Destroy(gameObject);
+        }
+    }
+
+    public void DestroyPowerUp()
+    {
+        _canDestroyPowerUp = true;
     }
 }

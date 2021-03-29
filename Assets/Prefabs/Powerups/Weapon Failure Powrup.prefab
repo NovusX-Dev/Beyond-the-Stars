@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 7084314503233729653}
   - component: {fileID: 5932831139536198099}
   - component: {fileID: 3938541744478736773}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Weapon Failure Powrup
-  m_TagString: Untagged
+  m_TagString: Power Up
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

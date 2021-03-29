@@ -76,10 +76,12 @@ public class Laser : MonoBehaviour
 
             Destroy(gameObject);
         }
+
     }
 
     public bool GetIsEnemyLaser()
     {
         return _isEnemyLaser;
     }
+
 }

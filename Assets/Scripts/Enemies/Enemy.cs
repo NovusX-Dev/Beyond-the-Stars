@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float speed = 4f;
     [SerializeField] protected int attackPower = 1;
     [SerializeField] protected int scoreAmount = 10;
+    [SerializeField] protected LayerMask _laserLayerMask;
 
     [Header("Movement")]
     [SerializeField] protected float yNewPos = 7f;
@@ -59,6 +60,14 @@ public class Enemy : MonoBehaviour
                 _canFire = Time.time + fireNext;
                 FireLasers();
             }
+
+            RaycastHit2D _ray = Physics2D.Raycast(transform.position, Vector3.down, 5f, _laserLayerMask);
+            if (_ray)
+            {
+                _ray.transform.GetComponent<PowerUp>().DestroyPowerUp();
+            }
+
+            Debug.DrawRay(transform.position, Vector3.down * 5f, Color.white);
         }
     }
 
@@ -89,6 +98,11 @@ public class Enemy : MonoBehaviour
         {
             lasers[i].AssignEnemyLaser();
         }
+    }
+
+    protected void ShootToDestroyPowerup()
+    {
+        Debug.Log("Power up infront of me");
     }
 
     protected void ShieldProbability()

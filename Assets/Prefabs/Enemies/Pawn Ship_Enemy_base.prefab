@@ -265,6 +265,9 @@ MonoBehaviour:
   speed: 4
   attackPower: 1
   scoreAmount: 10
+  _laserLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
   yNewPos: 7
   yRespawnPos: -6.8
   enemyLasers: {fileID: 5169010427843196906, guid: cf926bf3140146e4c953bc29a09aeb72, type: 3}
