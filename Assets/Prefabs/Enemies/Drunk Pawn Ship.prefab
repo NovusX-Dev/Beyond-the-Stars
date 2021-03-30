@@ -77,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 1255467461
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3154912113cbb4a498df6f571c74e18c, type: 3}
-  m_Color: {r: 0.41304737, g: 0.9622642, b: 0.7072781, a: 1}
+  m_Sprite: {fileID: 613435604629981061, guid: 57696212b56dbfe45be1577ea0f4d433, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -126,7 +126,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 5.12}
+    oldSize: {x: 3.7916667, y: 3.5833333}
     newSize: {x: 5.12, y: 5.12}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -265,6 +265,9 @@ MonoBehaviour:
   speed: 4
   attackPower: 1
   scoreAmount: 10
+  _laserLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   yNewPos: 7
   yRespawnPos: -6.8
   enemyLasers: {fileID: 5169010427843196906, guid: cf926bf3140146e4c953bc29a09aeb72, type: 3}
@@ -292,19 +295,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7514387244325783260, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
       propertyPath: m_Color.b
-      value: 0.6273585
-      objectReference: {fileID: 0}
-    - target: {fileID: 7514387244325783260, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
-      propertyPath: m_Color.g
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7514387244325783260, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
+      propertyPath: m_Color.g
+      value: 0.99255043
+      objectReference: {fileID: 0}
+    - target: {fileID: 7514387244325783260, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
       propertyPath: m_Color.r
-      value: 0.96110815
+      value: 0.627451
       objectReference: {fileID: 0}
     - target: {fileID: 7988726327495424023, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7988726327495424023, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7988726327495424023, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7988726327495424023, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
       propertyPath: m_LocalPosition.x

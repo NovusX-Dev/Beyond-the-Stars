@@ -16,7 +16,8 @@ public class GameManager : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
+            UIManager.Instance.QuitPanel(true);
+            Time.timeScale = 0;
         }
     }
 
@@ -28,5 +29,16 @@ public class GameManager : MonoBehaviour
     public void GameEnd()
     {
         _isGameOver = true;
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void ReturnToGame()
+    {
+        Time.timeScale = 1;
+        UIManager.Instance.QuitPanel(false);
     }
 }

@@ -33,6 +33,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject ammoWarning;
     [SerializeField] AudioClip outOfAmmoClip;
     [SerializeField] GameObject weaponFailuer;
+    [SerializeField] GameObject _quitPanel;
 
     [Header("Lives")]
     [SerializeField] Image livesDisplay;
@@ -59,6 +60,8 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
+        QuitPanel(false);
+        Time.timeScale = 1;
         _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         _audioSource = GetComponent<AudioSource>();
         livesDisplay.sprite = livesSprites[3];
@@ -198,5 +201,10 @@ public class UIManager : MonoBehaviour
     public void OnWeaponFailure(bool active)
     {
         weaponFailuer.SetActive(active);
+    }
+
+    public void QuitPanel(bool active)
+    {
+        _quitPanel.SetActive(active);
     }
 }

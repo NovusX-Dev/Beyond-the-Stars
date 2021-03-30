@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 1255467461
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3154912113cbb4a498df6f571c74e18c, type: 3}
+  m_Sprite: {fileID: 6530179738444782934, guid: 57696212b56dbfe45be1577ea0f4d433, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -126,7 +126,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 5.12}
+    oldSize: {x: 4.2916665, y: 3.5}
     newSize: {x: 5.12, y: 5.12}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -287,25 +287,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Shields
       objectReference: {fileID: 0}
+    - target: {fileID: 1781690138743483256, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7514387244325783260, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
       propertyPath: m_Color.a
       value: 0.25490198
       objectReference: {fileID: 0}
     - target: {fileID: 7514387244325783260, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
       propertyPath: m_Color.b
-      value: 0.68235296
+      value: 0.15730685
       objectReference: {fileID: 0}
     - target: {fileID: 7514387244325783260, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
       propertyPath: m_Color.g
-      value: 0.97523504
+      value: 0.9528302
       objectReference: {fileID: 0}
     - target: {fileID: 7514387244325783260, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.8852738
       objectReference: {fileID: 0}
     - target: {fileID: 7988726327495424023, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7988726327495424023, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7988726327495424023, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7988726327495424023, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
       propertyPath: m_LocalPosition.x

@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 5577179292087162332}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.55, y: 12.52, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 1016376324392723160}
   m_Father: {fileID: 0}
@@ -77,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 1255467461
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3154912113cbb4a498df6f571c74e18c, type: 3}
-  m_Color: {r: 1, g: 0.64255625, b: 0.6084906, a: 1}
+  m_Sprite: {fileID: -96796154962138083, guid: 57696212b56dbfe45be1577ea0f4d433, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -126,7 +126,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 5.12}
+    oldSize: {x: 3.7083333, y: 3.7916667}
     newSize: {x: 5.12, y: 5.12}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -265,6 +265,9 @@ MonoBehaviour:
   speed: 3
   attackPower: 1
   scoreAmount: 20
+  _laserLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   yNewPos: 7
   yRespawnPos: -6.8
   enemyLasers: {fileID: 5169010427843196906, guid: cf926bf3140146e4c953bc29a09aeb72, type: 3}
@@ -285,25 +288,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Shields
       objectReference: {fileID: 0}
+    - target: {fileID: 1781690138743483256, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7514387244325783260, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
       propertyPath: m_Color.a
       value: 0.3137255
       objectReference: {fileID: 0}
     - target: {fileID: 7514387244325783260, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
       propertyPath: m_Color.b
-      value: 0.6897472
+      value: 0.94509804
       objectReference: {fileID: 0}
     - target: {fileID: 7514387244325783260, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
       propertyPath: m_Color.g
-      value: 0.9433962
+      value: 0.9263209
       objectReference: {fileID: 0}
     - target: {fileID: 7514387244325783260, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
       propertyPath: m_Color.r
-      value: 0.8734785
+      value: 0.6901961
       objectReference: {fileID: 0}
     - target: {fileID: 7988726327495424023, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7988726327495424023, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7988726327495424023, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7988726327495424023, guid: 7df34be6aaa0fbb4b94cbbeb6d50f2d9, type: 3}
       propertyPath: m_LocalPosition.x
