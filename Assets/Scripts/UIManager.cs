@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
     [Header("Texts")]
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI gameoverText;
+
     [SerializeField] TextMeshProUGUI winText;
     [SerializeField] TextMeshProUGUI restartLevelText;
     [SerializeField] TextMeshProUGUI ammotText;

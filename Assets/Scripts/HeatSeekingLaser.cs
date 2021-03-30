@@ -24,9 +24,9 @@ public class HeatSeekingLaser : MonoBehaviour
     {
         
        if(_currentTarget == null)
-        {
-            GetCurrentTarget();
-        }
+       {
+           GetCurrentTarget();
+       }
     }
 
     

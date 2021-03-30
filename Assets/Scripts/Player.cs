@@ -36,16 +36,16 @@ public class Player : MonoBehaviour
 
     private float horiontalInput;
     private float verticalInput;
-
     private float _nextFire;
     private int _currentLives;
     private int _currentAmmo;
-    private bool _hasAmmo = true;
 
+    private bool _hasAmmo = true;
     private bool _tripleSHotActive = false;
     private bool _heatSeekingActive = false;
     private bool _shieldsActive = false;
     private bool _weaponFailureActive = false;
+    private bool _isBossAction = false;
 
     SpawnManager _spawnManager;
     WaveManager _wavesManager;
@@ -91,7 +91,10 @@ public class Player : MonoBehaviour
         _myAnim.SetFloat("xSpeed", horiontalInput);
 
         CalculateMovement();
-        CheckAmmoandFire();
+        if (!_isBossAction)
+        {
+            CheckAmmoandFire();
+        }
 
         if (Input.GetKeyDown(KeyCode.C))
         {
@@ -215,6 +218,10 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void ChangeBossAction(bool active)
+    {
+        _isBossAction = active;
+    }
     private void LivesVisualization()
     {
         if (_currentLives == 2)

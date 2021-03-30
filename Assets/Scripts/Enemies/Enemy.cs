@@ -100,11 +100,6 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    protected void ShootToDestroyPowerup()
-    {
-        Debug.Log("Power up infront of me");
-    }
-
     protected void ShieldProbability()
     {
         if (_currentShieldProbability <= _shieldProbability)

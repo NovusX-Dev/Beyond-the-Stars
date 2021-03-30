@@ -11,7 +11,7 @@ public class WaveManager : MonoBehaviour
     {
         public string waveName;
         public int enemyCountPerWave;
-        public Enemy[] enemyTypesToSpawn;
+        public GameObject[] enemyTypesToSpawn;
         public bool spawnBoss = false;
         public float enemySpawnTime = 5f;
         public AudioClip waveStartClip = null;
