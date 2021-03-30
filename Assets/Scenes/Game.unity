@@ -3683,18 +3683,21 @@ MonoBehaviour:
   - {fileID: 1260549533187403759, guid: 422d78cde217aee438dd950a3df7cd2c, type: 3}
   - {fileID: 3995811492049323393, guid: 1167f8724b18f6647997a81e77d4716b, type: 3}
   - {fileID: 5233927707749990436, guid: d750916eaf1cdec4cac29df6b9f6590b, type: 3}
-  _minSpawnTime: 10
-  _maxSpawnTime: 15
-  _refillPowerups:
-  - {fileID: 658334788459067423, guid: f6222b15f61da6e469420e08d57bba04, type: 3}
+  _minSpawnTime: 12
+  _maxSpawnTime: 16
+  _healthPowerups:
   - {fileID: 1440973367696910044, guid: 6e7df52fcc1fc944eb0a6d823daf9404, type: 3}
-  _minRefillTime: 10
-  _maxRefillTime: 12
+  _minHTime: 12
+  _maxHTime: 20
+  _ammoPowerups:
+  - {fileID: 658334788459067423, guid: f6222b15f61da6e469420e08d57bba04, type: 3}
+  _minATime: 8
+  _maxATime: 12
   _rarePowerUps:
   - {fileID: 955212580583972155, guid: 4b33e22bf9f94d244b6bf1bc51c3c0ed, type: 3}
   - {fileID: 4922476759408169051, guid: 02d743be0c191f84f8e4d83e07d6d842, type: 3}
-  _minRareTime: 12
-  _maxRareTime: 17
+  _minRareTime: 15
+  _maxRareTime: 22
 --- !u!4 &1974523526
 Transform:
   m_ObjectHideFlags: 0

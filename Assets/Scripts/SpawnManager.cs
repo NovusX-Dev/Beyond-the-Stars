@@ -13,9 +13,13 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject[] _powerUps;
     [SerializeField] float _minSpawnTime = 7f, _maxSpawnTime = 15f;
 
-    [Header("Ammo Health")]
-    [SerializeField] GameObject[] _refillPowerups;
-    [SerializeField] float _minRefillTime = 5f, _maxRefillTime = 10f;
+    [Header("Health")]
+    [SerializeField] GameObject[] _healthPowerups;
+    [SerializeField] float _minHTime = 5f, _maxHTime = 10f;
+    
+    [Header("Ammo")]
+    [SerializeField] GameObject[] _ammoPowerups;
+    [SerializeField] float _minATime = 5f, _maxATime = 10f;
 
     [Header("Rare PowerUps")]
     [SerializeField] GameObject[] _rarePowerUps;
@@ -25,26 +29,11 @@ public class SpawnManager : MonoBehaviour
 
     public void StartSpawning()
     {
-       // StartCoroutine(SpawnEnemyRoutine());
         StartCoroutine(SpawnPowerupRoutine());
-        StartCoroutine(SpawnRefillRoutine());
+        StartCoroutine(SpawnHealthRoutine());
+        StartCoroutine(SpawnAmmoRoutine());
         StartCoroutine(RarePowerUps());
     }
-
-
-    /*public IEnumerator SpawnEnemyRoutine()
-    {
-        yield return new WaitForSeconds(2f);
-
-        while (_canSpawn)
-        {
-            var posToSpawn = new Vector3(Random.Range(-8f, 8f), 7f, 0);
-            var enemy = Instantiate(_enemyPrefab, posToSpawn , Quaternion.identity);
-            enemy.transform.parent = _enemiesContainer.transform;
-
-            yield return new WaitForSeconds(_enemySpawnTime);
-        }
-    }*/
 
     IEnumerator SpawnPowerupRoutine()
     {
@@ -60,17 +49,31 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    IEnumerator SpawnRefillRoutine()
+    IEnumerator SpawnHealthRoutine()
     {
         yield return new WaitForSeconds(2f);
 
         while (_canSpawn)
         {
-            yield return new WaitForSeconds(Random.Range(_minRefillTime, _maxRefillTime));
+            yield return new WaitForSeconds(Random.Range(_minHTime, _maxHTime));
 
             var posToSpawn = new Vector3(Random.Range(-6f, 7f), 7f, 0);
-            int randomPowerup = Random.Range(0, 2);
-            Instantiate(_refillPowerups[randomPowerup], posToSpawn, Quaternion.identity);
+            int randomPowerup = Random.Range(0, 1);
+            Instantiate(_healthPowerups[randomPowerup], posToSpawn, Quaternion.identity);
+        }
+    }
+    
+    IEnumerator SpawnAmmoRoutine()
+    {
+        yield return new WaitForSeconds(2f);
+
+        while (_canSpawn)
+        {
+            yield return new WaitForSeconds(Random.Range(_minATime, _maxATime));
+
+            var posToSpawn = new Vector3(Random.Range(-6f, 7f), 7f, 0);
+            int randomPowerup = Random.Range(0, 1);
+            Instantiate(_ammoPowerups[randomPowerup], posToSpawn, Quaternion.identity);
         }
     }
 
